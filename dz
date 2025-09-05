@@ -1,0 +1,43 @@
+#include <iostream>
+#include<Windows.h>
+#include<iomanip>
+using namespace std;
+
+struct Books
+{
+	string title;
+	string author;
+	int numberofpages;
+	int yearofpublication;
+};
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	cout << "количество книг\n";
+	int N;
+	cin >> N;
+	Books* book = new Books[N];
+	for (int i = 0; i < N; i++)
+	{
+		cout << "введите название " << i + 1 << "-ой книги:\n";
+		cin >> book[i].title;
+		cout << "введите автора " << i + 1 << "-ой книги:\n";
+		cin >> book[i].author;
+		cout << "введите количество страниц " << i + 1 << "-ой книги:\n";
+		cin >> book[i].numberofpages;
+		cout << "введите год публикации " << i + 1 << "-ой книги:\n";
+		cin >> book[i].yearofpublication;
+	}
+	cout << "все книги" << endl;
+	for (int i = 0; i < N; i++)
+	{
+		cout << setw(2) << i + 1 << " ";
+		cout << book[i].title << " ";
+		cout << book[i].author << " ";
+		cout << book[i].numberofpages << " ";
+		cout << book[i].yearofpublication;
+		cout << endl;
+	}
+}
