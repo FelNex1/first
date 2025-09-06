@@ -1,0 +1,128 @@
+#include <iostream>
+#include<Windows.h>
+#include<iomanip>
+using namespace std;
+
+struct Students
+{
+	string surname;
+	string name;
+	string patronymic;
+	int grade[4];
+	double average;
+};
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	cout << "количество студентов\n";
+	int N;
+	cin >> N;
+
+	Students* student = new Students[N];
+
+	for (int i = 0; i < N; i++)
+	{
+		cout << "введите фамилию " << i + 1 << "-ого студента:\n";
+		cin >> student[i].surname;
+		cout << "введите имя " << i + 1 << "-ого студента\n";
+		cin >> student[i].name;
+		cout << "введите отчество " << i + 1 << "-ого студента\n";
+		cin >> student[i].patronymic;
+		cout << "введите 4 оценки " << i + 1 << "-ого студента\n";
+		for (int j = 0; j < 4; j++)
+		{
+			cin >> student[i].grade[j];
+		}
+	}
+	cout << "все студенты" << endl;
+	for (int i = 0; i < N; i++)
+	{
+		cout << setw(2) << i + 1 << " ";
+		cout << student[i].surname << " ";
+		cout << student[i].name << " ";
+		cout << student[i].patronymic << " ";
+		for (int j = 0; j < 4; j++)
+		{
+			cout << student[i].grade[j]<<" ";
+		}
+		cout << endl;
+	}
+	double GroupAverage = 0;
+	cout << "средний балл каждого студента: \n";
+	for (int i = 0; i < N; i++)
+	{
+		cout << i + 1 << " " << student[i].surname<<" ";
+		int SumOfGrades = 0;
+		for (int j = 0; j < 4; j++)
+		{
+			SumOfGrades += student[i].grade[j];
+		}
+		student[i].average = (float)SumOfGrades / 4;
+		cout << student[i].average << endl;
+		GroupAverage += student[i].average;
+	}
+
+	GroupAverage /= N;
+
+	cout << "средний балл студентов по всей группе " << GroupAverage << endl;
+
+	int CountStudentsHaveHighAverade=0;
+	cout << "студенты средний балл которых выше среднего балла по группе\n";
+	for (int i = 0; i < N; i++)
+	{
+		if (student[i].average > GroupAverage)
+		{
+			cout << CountStudentsHaveHighAverade+1 << " " << student[i].surname <<endl;
+			CountStudentsHaveHighAverade++;
+		}
+	}
+
+	cout << "список задолжников по группе\n";
+	int Debtor = 0;
+	for (int i = 0; i < N; i++)
+	{
+		bool HasDebt = false;
+		for (int j = 0; j < 4; j++)
+		{
+			if (student[i].grade[j] == 2)
+			{
+				HasDebt = true;
+			}
+		}
+		if (HasDebt)
+		{
+			cout << Debtor + 1 << " " << student[i].surname << endl;
+			Debtor++;
+		}
+	}
+	if (Debtor == 0)
+	{
+		cout << "в группе нету задолжников\n";
+	}
+
+	cout << "список отличников\n";
+	int HonorStudent = 0;
+	for (int i = 0; i < N; i++)
+	{
+		int Five = 0;
+		for (int j = 0; j < 4; j++)
+		{
+			if (student[i].grade[j] == 5)
+			{
+				Five++;
+			}
+		}
+		if (Five == 4)
+		{
+			cout << HonorStudent + 1 << " " << student[i].surname << endl;
+			HonorStudent++;
+		}
+	}
+	if (HonorStudent == 0)
+	{
+		cout << "в группе нету отличников\n";
+	}
+}
