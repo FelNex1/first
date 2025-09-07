@@ -1,0 +1,45 @@
+#include<iostream>
+#include<Windows.h>
+#include<iomanip>
+using namespace std;
+
+struct ChemicalElemens
+{
+	string Name;
+	string Symbol;
+	int OrdinalNumber;
+	float AtomicMass;
+};
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	
+	int N;
+	cout << "Количество элементов\n";
+	cin >> N;
+	ChemicalElemens* ChemicalElemen = new ChemicalElemens[N];
+
+	for (int i = 0; i < N; i++)
+	{
+		cout << "Введите название " << i + 1 << "-ого элемента\n";
+		cin >> ChemicalElemen[i].Name;
+		cout << "Введите символ " << i + 1 << "-ого элемента\n";
+		cin >> ChemicalElemen[i].Symbol;
+		cout << "Введите порядковый номер " << i + 1 << "-ого элемента\n";
+		cin >> ChemicalElemen[i].OrdinalNumber;
+		cout << "Введите атомную массу " << i + 1 << "-ого элемента\n";
+		cin >> ChemicalElemen[i].AtomicMass;
+	}
+
+	cout << "все элементы\n";
+	for (int i = 0; i < N; i++)
+	{
+		cout << setw(2)<<i + 1 << " ";
+		cout << ChemicalElemen[i].Name << " ";
+		cout << ChemicalElemen[i].Symbol << " ";
+		cout << ChemicalElemen[i].OrdinalNumber << " ";
+		cout << ChemicalElemen[i].AtomicMass << endl;
+	}
+}
